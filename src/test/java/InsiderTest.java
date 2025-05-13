@@ -22,22 +22,21 @@ public class InsiderTest extends Base {
         openPositionsPage = new OpenPositionsPage(driver);
     }
 
-    @Test
+    @Test(priority = 1)
     public void verifyHomePageIsOpened() {
         homePage.openHomePage();
         assertEquals(driver.getTitle(), "#1 Leader in Individualized, Cross-Channel CX — Insider", "Home page is not opened");
     }
 
-    @Test
+    @Test(priority = 2)
     public void verifyAllBlocksAreDisplayedInCareersPage() {
-        homePage.openHomePage();
         homePage.clickToCareersLink();
         careersPage = new CareersPage(driver);
 
         assertTrue(careersPage.areAllBlocksDisplayed());
     }
 
-    @Test
+    @Test(priority = 3)
     public void verifyQaJobsHaveCorrectListing() {
         openPositionsPage.goToOpenPositionsPage();
 
@@ -51,18 +50,12 @@ public class InsiderTest extends Base {
         ));
     }
 
-    @Test
+    @Test(priority = 4)
     public void testJobApplication() {
-        openPositionsPage.goToOpenPositionsPage();
-
-        openPositionsPage.clickSeeAllQaJobsButton();
-        openPositionsPage.filterJobs();
-
         openPositionsPage.clickViewRole();
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
         String openedPageUrl = switchToNewTabAndGetUrl(driver);
         assertTrue(openedPageUrl.contains("lever"), "URL does not contain 'lever'");
     }
-
 }
