@@ -27,8 +27,10 @@ public class CareersPage extends Base
         waitForElementVisible(locationsBlock);
         waitForElementVisible(lifeAtInsiderBlock);
 
-        return locationsBlock.isDisplayed() &&
+        boolean allBlocksDisplayed = locationsBlock.isDisplayed() &&
                 teamsBlock.isDisplayed() &&
                 lifeAtInsiderBlock.isDisplayed();
+
+        return allBlocksDisplayed;
     }
 }
