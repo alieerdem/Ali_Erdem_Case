@@ -49,8 +49,6 @@ public class OpenPositionsPage extends Base {
     @FindBy(id = "resultCounter")
     private WebElement resultCounter;
 
-    private By viewRoleButtonLocator = By.xpath("//a[text()='View Role']");
-
     private By positionOfJobListings = By.cssSelector(".position");
     private By departmentOfJobListings = By.cssSelector(".department");
     private By locationOfJobListings = By.cssSelector(".location");
