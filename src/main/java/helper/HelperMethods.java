@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
@@ -65,4 +66,24 @@ public class HelperMethods {
         return chromeOptions;
     }
 
+    public static FirefoxOptions getFirefoxOptions() {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        // Disable notifications
+        firefoxOptions.addPreference("dom.webnotifications.enabled", false);
+        // Disable GPU acceleration
+        firefoxOptions.addPreference("layers.acceleration.disabled", true);
+        // Disable popup blocking
+        firefoxOptions.addPreference("dom.disable_open_during_load", false);
+        // Accept insecure certificates
+        firefoxOptions.setAcceptInsecureCerts(true);
+        // Ignore certificate errors
+        firefoxOptions.addPreference("security.default_personal_cert", "Select Automatically");
+        firefoxOptions.addPreference("network.stricttransportsecurity.preloadlist", false);
+        // Suppress various popups
+        firefoxOptions.addPreference("browser.tabs.warnOnClose", false);
+        firefoxOptions.addPreference("browser.tabs.warnOnCloseOtherTabs", false);
+        firefoxOptions.addPreference("browser.tabs.warnOnOpen", false);
+        
+        return firefoxOptions;
+    }
 }

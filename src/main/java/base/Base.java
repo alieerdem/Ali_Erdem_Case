@@ -25,7 +25,6 @@ public class Base {
     public static WebDriver driver;
     public static WebDriverWait wait;
     public static final String baseUrl = "https://www.useinsider.com/";
-    static ChromeOptions chromeOptions = new ChromeOptions().addArguments("--disable-notifications");
     static FirefoxOptions firefoxOptions = new FirefoxOptions().addArguments("--disable-notifications");
 
     // Constructor for Page Objects
@@ -56,10 +55,8 @@ public class Base {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-
-
     @AfterMethod
-    public void afterClass(ITestResult result) {
+    public void takeScreenshotIfCaseFails(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             try {
