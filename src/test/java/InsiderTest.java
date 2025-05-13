@@ -9,7 +9,7 @@ import static helper.HelperMethods.switchToNewTabAndGetUrl;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class Test extends Base {
+public class InsiderTest extends Base {
 
     private HomePage homePage;
     private CareersPage careersPage;
@@ -22,13 +22,13 @@ public class Test extends Base {
         openPositionsPage = new OpenPositionsPage(driver);
     }
 
-    @org.testng.annotations.Test(priority = 1)
+    @Test(priority = 1)
     public void verifyHomePageIsOpened() {
         homePage.openHomePage();
         assertEquals(driver.getTitle(), "#1 Leader in Individualized, Cross-Channel CX — Insider", "Home page is not opened");
     }
 
-    @org.testng.annotations.Test(priority = 2)
+    @Test(priority = 2)
     public void verifyAllBlocksAreDisplayedInCareersPage() {
         homePage.openHomePage();
         homePage.clickToCareersLink();
@@ -37,7 +37,7 @@ public class Test extends Base {
         assertTrue(careersPage.areAllBlocksDisplayed());
     }
 
-    @org.testng.annotations.Test(priority = 3)
+    @Test(priority = 3)
     public void verifyQaJobsHaveCorrectListing() {
         openPositionsPage.goToOpenPositionsPage();
 
@@ -51,7 +51,7 @@ public class Test extends Base {
         ));
     }
 
-    @org.testng.annotations.Test(priority = 4)
+    @Test(priority = 4)
     public void testJobApplication() {
         openPositionsPage.goToOpenPositionsPage();
 

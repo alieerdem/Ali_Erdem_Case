@@ -3,7 +3,7 @@
     <test name="regression">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="Test"/>
+            <class name="InsiderTest"/>
         </classes>
     </test>
 </suite>
