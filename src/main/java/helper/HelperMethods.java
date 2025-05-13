@@ -25,10 +25,13 @@ public class HelperMethods {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static void waitForElementInvisible(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
     public static boolean isElementPresent(By locator) {
         try {
-            WebDriverWait localWait = new WebDriverWait(driver, Duration.ofMillis(300));
-            localWait.until(ExpectedConditions.elementToBeClickable(locator));
+            wait.until(ExpectedConditions.elementToBeClickable(locator));
             WebElement element = driver.findElement(locator);
             return element.isDisplayed();
         } catch (TimeoutException | NoSuchElementException e) {

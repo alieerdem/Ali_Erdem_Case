@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -62,9 +63,9 @@ public class OpenPositionsPage extends Base {
         clickWhenClickable(seeAllQaJobsButton);
     }
 
-    public void filterJobs() throws InterruptedException {
+    public void filterJobs() {
 
-        //The loop added since usually locations are not parsed when the page is opened, and that causes tests to fail.
+        //The loop added since locations are usually not parsed when the page is opened, and that causes tests to fail.
         // This solution ignores a static long sleep and prevents time loss.
         for(int attempts = 0; attempts < 20; attempts++) {
             clickWhenClickable(locationFilter);
@@ -77,9 +78,8 @@ public class OpenPositionsPage extends Base {
                         //Continue in the loop to try to click the element in case something went wrong
                     }
                 } else {
-                    //If Istanbul is not present, click the location filter again so loop can start over
+                    //If Istanbul is not present, click the location filter again so the loop can start over
                     locationFilter.click();
-                    Thread.sleep(200);
                 }
         }
     }
@@ -102,12 +102,11 @@ public class OpenPositionsPage extends Base {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", resultCounter);
 
-        //Have to wait until job lists are rendered correctly, will throw stale element error otherwise
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        // Wait for the "View Role" button to be clickable, used refresh since elements are being rendered
+        wait.until(ExpectedConditions.refreshed(
+                ExpectedConditions.elementToBeClickable(viewRoleButton)
+        ));
+
 
         // Perform a hover action on the "View Role" button since it's necessary to be hovered to click
         Actions actions = new Actions(driver);
