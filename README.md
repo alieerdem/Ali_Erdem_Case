@@ -21,7 +21,7 @@ This test automation framework is built using Selenium WebDriver with Java and T
 2. Install dependencies: mvn clean install
 
 3. Run test via maven which will run default on Chrome browser: mvn clean test
-   Optionally browser can be send as a parameter, supporting Chrome and Firefox. Example: mvn clean test -Dbrowser=firefox
+4. Optionally, the browser can be specified as a parameter. Chrome and Firefox are supported. Example: mvn clean test -Dbrowser=firefox
    
 ## Key Features
 
