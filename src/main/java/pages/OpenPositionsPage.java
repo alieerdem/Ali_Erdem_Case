@@ -26,25 +26,16 @@ public class OpenPositionsPage extends Base {
     @FindBy(css = "span[aria-labelledby='select2-filter-by-location-container']")
     private WebElement locationFilter;
 
-    @FindBy(css = "#select2-filter-by-department-container")
-    private WebElement departmentFilter;
-
     @FindBy(css = ".job-item")
     private List<WebElement> jobList;
 
     @FindBy(xpath = "//li[@role='option' and normalize-space(text())='Istanbul, Turkiye']")
     private WebElement istanbulOption;
 
-    @FindBy(xpath = "//a[text()='View Role']")
-    private List<WebElement> buttons;
-
     private By istanbulLocator = By.xpath("//li[@role='option' and normalize-space(text())='Istanbul, Turkiye']");
 
     @FindBy(xpath = "//a[text()='View Role']")
     private WebElement viewRoleButton;
-
-    @FindBy(xpath = "//div[contains(@class, 'position-list-item-wrapper')]")
-    private WebElement jobListing;
 
     @FindBy(id = "resultCounter")
     private WebElement resultCounter;
