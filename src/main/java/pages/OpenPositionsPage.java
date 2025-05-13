@@ -105,7 +105,6 @@ public class OpenPositionsPage extends Base {
                 ExpectedConditions.elementToBeClickable(viewRoleButton)
         ));
 
-
         // Perform a hover action on the "View Role" button since it's necessary to be hovered to click
         Actions actions = new Actions(driver);
         actions.moveToElement(viewRoleButton).perform();
