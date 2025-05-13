@@ -1,0 +1,118 @@
+package pages;
+
+import base.Base;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
+
+import static helper.HelperMethods.*;
+
+public class OpenPositionsPage extends Base {
+    public OpenPositionsPage(WebDriver driver) {
+        super(driver);
+    }
+
+    private static final String OPEN_POSITIONS_PAGE_URL = baseUrl + "careers/quality-assurance/";
+
+    @FindBy(xpath = "//a[.='See all QA jobs']")
+    private WebElement seeAllQaJobsButton;
+
+    @FindBy(css = "span[aria-labelledby='select2-filter-by-location-container']")
+    private WebElement locationFilter;
+
+    @FindBy(css = "#select2-filter-by-department-container")
+    private WebElement departmentFilter;
+
+    @FindBy(css = ".job-item")
+    private List<WebElement> jobList;
+
+    @FindBy(xpath = "//li[@role='option' and normalize-space(text())='Istanbul, Turkiye']")
+    private WebElement istanbulOption;
+
+    @FindBy(xpath = "//a[text()='View Role']")
+    private List<WebElement> buttons;
+
+    private By istanbulLocator = By.xpath("//li[@role='option' and normalize-space(text())='Istanbul, Turkiye']");
+
+    @FindBy(xpath = "//a[text()='View Role']")
+    private WebElement viewRoleButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'position-list-item-wrapper')]")
+    private WebElement jobListing;
+
+    @FindBy(id = "resultCounter")
+    private WebElement resultCounter;
+
+    private By viewRoleButtonLocator = By.xpath("//a[text()='View Role']");
+
+    private By positionOfJobListings = By.cssSelector(".position");
+    private By departmentOfJobListings = By.cssSelector(".department");
+    private By locationOfJobListings = By.cssSelector(".location");
+
+    public void goToOpenPositionsPage() {
+        driver.get(OPEN_POSITIONS_PAGE_URL);
+    }
+
+    public void clickSeeAllQaJobsButton() {
+        clickWhenClickable(seeAllQaJobsButton);
+    }
+
+    public void filterJobs() throws InterruptedException {
+
+        //The loop added since usually locations are not parsed when the page is opened, and that causes tests to fail.
+        // This solution ignores a static long sleep and prevents time loss.
+        for(int attempts = 0; attempts < 20; attempts++) {
+            clickWhenClickable(locationFilter);
+
+                if (isElementPresent(istanbulLocator)){
+                    try{
+                        istanbulOption.click();
+                        break;
+                    } catch (Exception e){
+                        //Continue in the loop to try to click the element in case something went wrong
+                    }
+                } else {
+                    //If Istanbul is not present, click the location filter again so loop can start over
+                    locationFilter.click();
+                    Thread.sleep(200);
+                }
+        }
+    }
+
+    public boolean doesAllJobsHaveCorrectDetails(String position, String department, String location) {
+        return jobList.stream().allMatch(job -> {
+            String jobPosition = job.findElement(positionOfJobListings).getText();
+            String jobDepartment = job.findElement(departmentOfJobListings).getText();
+            String jobLocation = job.findElement(locationOfJobListings).getText();
+
+            return jobPosition.contains(position) &&
+                    jobDepartment.contains(department) &&
+                    jobLocation.contains(location);
+        });
+    }
+
+    public void clickViewRole() {
+
+        // Scroll to the result counter
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", resultCounter);
+
+        //Have to wait until job lists are rendered correctly, will throw stale element error otherwise
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Perform a hover action on the "View Role" button since it's necessary to be hovered to click
+        Actions actions = new Actions(driver);
+        actions.moveToElement(viewRoleButton).perform();
+
+        clickWhenClickable(viewRoleButton);
+        }
+}
