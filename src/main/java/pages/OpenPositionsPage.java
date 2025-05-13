@@ -18,7 +18,7 @@ public class OpenPositionsPage extends Base {
         super(driver);
     }
 
-    private static final String OPEN_POSITIONS_PAGE_URL = baseUrl + "careers/quality-assurance/";
+    private static final String OPEN_POSITIONS_PAGE_URL = BASE_URL + "careers/quality-assurance/";
 
     @FindBy(xpath = "//a[.='See all QA jobs']")
     private WebElement seeAllQaJobsButton;

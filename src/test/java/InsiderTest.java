@@ -22,13 +22,13 @@ public class InsiderTest extends Base {
         openPositionsPage = new OpenPositionsPage(driver);
     }
 
-    @Test(priority = 1)
+    @Test
     public void verifyHomePageIsOpened() {
         homePage.openHomePage();
         assertEquals(driver.getTitle(), "#1 Leader in Individualized, Cross-Channel CX — Insider", "Home page is not opened");
     }
 
-    @Test(priority = 2)
+    @Test
     public void verifyAllBlocksAreDisplayedInCareersPage() {
         homePage.openHomePage();
         homePage.clickToCareersLink();
@@ -37,7 +37,7 @@ public class InsiderTest extends Base {
         assertTrue(careersPage.areAllBlocksDisplayed());
     }
 
-    @Test(priority = 3)
+    @Test
     public void verifyQaJobsHaveCorrectListing() {
         openPositionsPage.goToOpenPositionsPage();
 
@@ -51,7 +51,7 @@ public class InsiderTest extends Base {
         ));
     }
 
-    @Test(priority = 4)
+    @Test
     public void testJobApplication() {
         openPositionsPage.goToOpenPositionsPage();
 

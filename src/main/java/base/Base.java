@@ -6,9 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -25,8 +23,7 @@ public class Base {
 
     public static WebDriver driver;
     public static WebDriverWait wait;
-    public static final String baseUrl = "https://www.useinsider.com/";
-    static FirefoxOptions firefoxOptions = new FirefoxOptions().addArguments("--disable-notifications");
+    public static final String BASE_URL = "https://www.useinsider.com/";
 
     // Constructor for Page Objects
     public Base(WebDriver driver) {

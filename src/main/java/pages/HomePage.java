@@ -21,7 +21,7 @@ public class HomePage extends Base
     private WebElement careersLink;
 
     public void openHomePage() {
-        driver.get(baseUrl);
+        driver.get(BASE_URL);
     }
 
     public void clickToCareersLink() {

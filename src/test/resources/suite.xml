@@ -1,5 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="InsiderCase">
+<suite name="InsiderCase" parallel="methods" thread-count="2">
+    <listeners>
+        <listener class-name="helper.RetryListener"/>
+    </listeners>
+
     <test name="regression">
         <parameter name="browser" value="chrome"/>
         <classes>
