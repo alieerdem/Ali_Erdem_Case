@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 import static helper.HelperMethods.getChromeOptions;
+import static helper.HelperMethods.getFirefoxOptions;
 
 public class Base {
 
@@ -45,7 +46,7 @@ public class Base {
             driver = new ChromeDriver(getChromeOptions());
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver(firefoxOptions);
+            driver = new FirefoxDriver(getFirefoxOptions());
         } else {
             throw new RuntimeException("Unsupported browser: " + browser);
         }
